@@ -1,0 +1,16 @@
+{
+	"geode": "4.4.0",
+	"gd": {
+		"win": "2.2074",
+		"android": "2.2074",
+		"mac": "2.2074",
+		"ios": "2.2074"
+	},
+	"id": "nwo5.percent_liked",
+	"name": "Percent Liked",
+	"version": "v1.0.0",
+	"developer": "Nwo5",
+	"description": "Show percentage tof likes to downloads.",
+	"tags": ["offline"],
+	"links": {"source": "https://github.com/Nwo5-trg/Percentage-Liked"}
+}

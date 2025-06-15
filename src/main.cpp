@@ -20,12 +20,11 @@ class $modify(LevelLayer, LevelInfoLayer) {
     
     bool init(GJGameLevel* level, bool challenge) {
         if (!LevelInfoLayer::init(level, challenge)) return false;
-        auto percentLikedLabel = CCLabelBMFont::create("", "chatFont.fnt");
-        percentLikedLabel->setColor(ccc3(0, 0, 0));
-        percentLikedLabel->setOpacity(100);
+        auto percentLikedLabel = CCLabelBMFont::create("", "bigFont.fnt");
+        percentLikedLabel->setColor(ccc3(255, 255, 255));
         percentLikedLabel->setPosition(m_likesLabel->getPositionX(), m_likesLabel->getPositionY() - 12);
         percentLikedLabel->setAnchorPoint(ccp(0.0f, 0.5f));
-        percentLikedLabel->setScale(0.5f);
+        percentLikedLabel->setScale(0.3f);
         this->addChild(percentLikedLabel);
         m_fields->percentLikedLabel = percentLikedLabel;
         updatePercentLikedLabel();
@@ -39,14 +38,20 @@ class $modify(LevelLayer, LevelInfoLayer) {
 
     void updatePercentLikedLabel() {
         auto label = m_fields->percentLikedLabel;
-        if (!label) return;
+        auto likes = m_level->m_likes;
         auto downloads = m_level->m_downloads;
+        auto percent = (likes / (float)downloads) * 100;
+        if (!label) return;
         if (downloads == 0) {
             label->setString("N/A");
             return;
         }
-        auto likes = m_level->m_likes;
-        auto percent = (likes / (float)downloads) * 100;
+        if (percent < 0){
+            m_fields->percentLikedLabel->setColor(ccc3(255, 0, 0));
+        }
+        else if (percent > 0){
+            m_fields->percentLikedLabel->setColor(ccc3(0, 255, 0));
+        }
         label->setString((ftofstr(percent, 2) + "%").c_str());
     }
 };
